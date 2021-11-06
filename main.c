@@ -33,7 +33,7 @@ int main(void){
 	temp=minum;
 	while(temp<maxnum){
 	if(isPalindrome(temp)){
-	printf("%d ",isPalindrome(temp));
+	printf(" %d",isPalindrome(temp));
 	                  }
 	temp++;
  	}
