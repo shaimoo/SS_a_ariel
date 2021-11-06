@@ -17,27 +17,21 @@ return 0;
 }
 
 int isArmstrong(int num){
-int r=0, ans=0,temp,k;
+int r=0, ans=0,temp,size=0;
+temp=num;
+while(temp!=0){
+size++;
+temp/=10;
+}
 temp=num;
 while(temp>0){
-k=temp%10;
-r=power(k,(int)sizeof(num));
-ans=ans+r;
-temp=temp/10;
+r=temp%10;
+ans+=pow(r,size);
+temp/=10;
 }
-if(ans==num)
-{
+if(num==ans)
 return num;
-}
+
 return 0;
 }
 
-int power(int num,int p){
-int ans=1;
-while(p>0)
-{
-ans=ans*num;
-p--;
-}
-return ans;
-}

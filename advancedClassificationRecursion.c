@@ -2,20 +2,29 @@
 #include "math.h"
 #include "NumClass.h"
 
-int check(int num,int len){
-if(num>0){
-return((int)pow((int)num%10,len)+check(num/10,len));
-}
-return 0;
-}
 
-int isArmstrong(int num ){
-int x=(int)sizeof(num);
-if(check(num,x-1)==num)
+int isArmstrong(int num){
+int temp=num,size=0,ans=0;
+while(temp!=0){
+size++;
+temp/=10;
+}
+ans=check(num,size);
+if(ans==num)
 return num;
 
 return 0;
 }
+
+	int check(int num,int len){
+		 int r;
+		if(num>0){
+		r=num%10;
+		return pow(r,len)+check(num/10,len);
+		}
+		return 0;
+		}
+
 
 int revers(int num){
 int r = (int)log10(num);
