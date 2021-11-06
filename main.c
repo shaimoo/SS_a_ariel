@@ -55,7 +55,7 @@ int main(void){
 	                  }
 	temp++;
  	}
-	printf("\n\n");
+	printf("\n");
 	return 0;
 }
 

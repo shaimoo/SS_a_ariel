@@ -18,12 +18,12 @@ advancedClassification.o: advancedClassificationLoop.c NumClass.h
 advancedClassificationRecursion.o: advancedClassificationRecursion.c NumClass.h
 	$(CC)  -c $(DD)  advancedClassificationRecursion.c -lm
 
-libclassloops.a:${OBJECTS1}
+libclassloops.a: ${OBJECTS1}
 	$(AR) -rcs libclassllops.a ${OBJECTS1}
 
 loops: libclassloops.a
 
-libclassrec.a:${OBJECTS2}
+libclassrec.a: ${OBJECTS2}
 	$(AR) -rcs libclassrec.a ${OBJECTS2}
 
 recursives: libclassrec.a
@@ -35,7 +35,7 @@ libclassrec.so: ${OBJECTS2}
 
 loopd:libclassloops.so
 
-libclassloops.so:${OBJECTS1}
+libclassloops.so: ${OBJECTS1}
 	$(CC)   -shared -o libclassloops.so ${OBJECTS1} -lm
 
 mains:  libclassrec.a  main.o
@@ -44,7 +44,7 @@ mains:  libclassrec.a  main.o
 maindloop: loopd main.o
 	$(CC) $(DD)  -o  maindloop main.o ./libclassloops.so -lm
 
-maindrec:recursived main.o
+maindrec: recursived main.o
 	$(CC) $(DD) -o  maindrec main.o ./libclassrec.so  -lm
 
 all: $(ALL) $(LIB)
