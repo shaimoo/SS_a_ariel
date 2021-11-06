@@ -49,11 +49,11 @@ maindrec: recursived main.o
 
 all: $(ALL) $(LIB)
 
-.PHONY:clean
+.PHONY: clean
 
 clean:
 	rm -f *.out *.a *.so  mains  maindloop maindrec *.o all
-
+ 
 
 
 
