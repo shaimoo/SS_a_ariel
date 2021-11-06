@@ -1,7 +1,7 @@
 CC =gcc
 DD =-Wall -g
 AR=ar
-OBJECTS1= basicClassification.o advancedClassificationLoop.o main.o
+OBJECTS1= basicClassification.o advancedClassificationLoop.o
 OBJECTS2= basicClassification.o advancedClassificationRecursion.o
 ALL=  mains maindloop maindrec
 LIB= libclassloops.a libclassrec.a libclassrec.so libclassloops.so
@@ -10,16 +10,16 @@ main.o: main.c NumClass.h
 	$(CC) $(DD) -c main.c
 
 basicClassification.o: basicClassification.c NumClass.h
-	$(CC)  -c $(DD)   basicClassification.c -lm
+	$(CC)  $(DD) -c  basicClassification.c -lm
 
 advancedClassification.o: advancedClassificationLoop.c NumClass.h
-	$(CC)  -c $(DD)  advancedClassificationLoop.c -lm
+	$(CC)  $(DD) -c  advancedClassificationLoop.c -lm
 
 advancedClassificationRecursion.o: advancedClassificationRecursion.c NumClass.h
-	$(CC)  -c $(DD)  advancedClassificationRecursion.c -lm
+	$(CC)  $(DD) -c  advancedClassificationRecursion.c -lm
 
 libclassloops.a: ${OBJECTS1}
-	$(AR) -rcs libclassllops.a ${OBJECTS1}
+	$(AR) -rcs libclassloops.a ${OBJECTS1}
 
 loops: libclassloops.a
 
@@ -31,20 +31,20 @@ recursives: libclassrec.a
 recursived: libclassrec.so
 
 libclassrec.so: ${OBJECTS2}
-	$(CC)  -shared -o  libclassrec.so ${OBJECTS2} -lm
+	$(CC)  -shared -fPIC -o  libclassrec.so ${OBJECTS2} -lm
 
-loopd:libclassloops.so
+loopd: libclassloops.so
 
 libclassloops.so: ${OBJECTS1}
-	$(CC)   -shared -o libclassloops.so ${OBJECTS1} -lm
+	$(CC)   -shared -fPIC -o libclassloops.so ${OBJECTS1} -lm
 
-mains:  libclassrec.a  main.o
+mains: libclassrec.a  main.o
 	$(CC) $(DD) -o mains main.o libclassrec.a -lm
 
-maindloop: loopd main.o
+maindloop: libclassloops.so  main.o
 	$(CC) $(DD)  -o  maindloop main.o ./libclassloops.so -lm
 
-maindrec: recursived main.o
+maindrec: libclassrec.a main.o
 	$(CC) $(DD) -o  maindrec main.o ./libclassrec.so  -lm
 
 all: $(ALL) $(LIB)
@@ -53,7 +53,6 @@ all: $(ALL) $(LIB)
 
 clean:
 	rm -f *.out *.a *.so  mains  maindloop maindrec *.o all
- 
 
 
 
