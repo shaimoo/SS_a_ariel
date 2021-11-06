@@ -6,10 +6,8 @@
 int main(void){
 
 	int minum=0,maxnum=0,temp=0;
-	printf("anter the first num:");
-	scanf("%d",&maxnum);
-	printf("anter the secont num:");
-	scanf("%d",&minum);
+	printf("anter the nums:");
+	scanf("%d%d",&maxnum, &minum );
 	if(minum>maxnum){
 	temp=maxnum;
 	maxnum=minum;
