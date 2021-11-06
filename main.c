@@ -6,7 +6,7 @@
 int main(void){
 
 	int minum=0,maxnum=0,temp=0;
-	printf("anter the nums:");
+	
 	scanf("%d%d",&maxnum, &minum );
 	if(minum>maxnum){
 	temp=maxnum;
