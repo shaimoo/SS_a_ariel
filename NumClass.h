@@ -3,7 +3,6 @@
 
 int revers(int);
 int check(int,int);
-int power(int,int);
 int factor(int);
 int isArmstrong(int);
 int isPalindrome(int);
