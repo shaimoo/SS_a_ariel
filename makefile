@@ -44,10 +44,10 @@ mains: libclassrec.a  main.o
 maindloop: libclassloops.so  main.o
 	$(CC) $(DD)  -o  maindloop main.o ./libclassloops.so -lm
 
-maindrec: libclassrec.a main.o
+maindrec:  main.o libclassrec.a
 	$(CC) $(DD) -o  maindrec main.o ./libclassrec.so  -lm
 
-all: $(ALL) $(LIB)
+all: $(LIB)  $(ALL)
 
 .PHONY: clean
 
