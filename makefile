@@ -24,6 +24,8 @@ all: $(OBJECTS2) $(ALL) libd.so stringProg
 clean:
 	rm -f *.out *.a *.so  stringProg *.save   *.o all
 
+clean_windows:
+	del /f *.out *.a *.so  stringProg *.save   *.o all
 
 
 

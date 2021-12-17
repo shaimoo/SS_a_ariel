@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include <math.h>
@@ -180,63 +181,93 @@
 
 						}
 							}
-		int loce(char word [] , int size , char a ){
-			for(int i=0 ; i < size ; i++){
-			if(word[i]==a)
-				return i;
-							}
-				return 0 ;
+		int find_index_of_char(char word [] , int word_len , char character ){
+			for(int i=0 ; i < word_len ; i++){
+			    if(word[i]==character)
+				    return i;
+            }
+            return -1 ;
+        }
 
-								}
+        int is_additional_character(char word [] , int word_len, bool found_till_now [], char character ){
+            for(int i=0 ; i < word_len ; i++){
+                if(word[i]==character && found_till_now[i]==0)
+                    return i;
+            }
+            return -1 ;
+        }
 
-		bool all(bool ans [] , int size){
-		for(int i = 0 ; i < size ; i++){
+		bool found_all_chars(bool *ans  , int size){
+            for(int i = 0 ; i < size ; i++){
+                if(ans[i]==0)
+                    return 0;
+            }
+            return 1;
+        }
 
-		if(ans[i]==false)
-			return false;
-						}
+        void print_word_and_ans(char word [], bool ans [] , int size, char txt [], int start_index, int end_index){
+            return;
+            printf("%s\n",word);
+            for(int i = 0 ; i < size ; i++){
+                printf("%d,",ans[i]);
+            }
+            for(int i = start_index ; i <= end_index ; i++){
+                printf("%c",txt[i]);
+            }
 
-				return true;
-						}
+        }
 
-		int  checksize(char word [] , char txt [] , int size ,int max){
-			bool ans [size];
-			int conter=0;
-			if(!loce(word,size,txt[0]))
-				return 0;
-			for(int i=0 ; i<max ; i++){
+		int find_word_to_print(char word [] , char txt [] , bool ans [], int word_len ,int txt_len,int start_index){
 
-				if(all(ans,size)){
-				return conter;
-						}
+            for(int i = 0 ; i < word_len ; i++){
+                ans[i]=0;
+            }
+			int counter=0;
+
+			for(int i=start_index ; i<txt_len ; i++){
+                //print_word_and_ans(word, ans, word_len, txt, start_index, i);
+				if(found_all_chars(ans,word_len)){
+				    return counter;
+                }
 				if(txt[i]==0 || txt[i]=='~')
 					return 0;
 
-				if((int)txt[i]<97 && (int)txt[i]>124 && (int)txt[i]<65 && (int)txt[i]>90 ){
-				continue;
-				conter++;}
-
-				if(loce(word,size,txt[i])){
-					conter++;
-					ans[loce(word,size,txt[i])]=true;
-								}
-
-							}
-					return 0 ;
-				}
+                if(txt[i]==' ') {
+                    if(i==start_index){
+                        return 0;}
+                    counter++;
+                    continue;
+                }
+                int index_to_override = is_additional_character(word, word_len, ans, txt[i]);
+                if(index_to_override > -1){
+                    ans[index_to_override]=1;
+                    counter++;
+                }
+                else{
+                    return 0;
+                }
+            }
+            return 0 ;
+            }
 
 		void  anagram(char word [] , char txt [] ){
-		int size = strlen(word);
-		int max = strlen(txt);
-		bool end=false;
-		for(int i =0 ; i < max-size ; i++){
-			if(checksize(word,txt,size,max)>0){
-				if(end!=false)
-					printf("~");
-				for(int j=i;j<i+checksize(word,txt,size,max);j++){
-				printf("%c",txt[j]);
-										}
-				end=true;
-							}
-						}
-								}
+		
+            int word_len = strlen(word);
+            int txt_len = strlen(txt);
+            revers(word);
+
+            bool should_print_delimeter=false;
+            for(int i =0 ; i < txt_len-word_len ; i++){
+
+                        bool* ans = (bool*) malloc(word_len * sizeof(bool));
+                int print_len = find_word_to_print(word,txt,ans, word_len,txt_len,i);
+                if(print_len>0){
+                    if(should_print_delimeter!=false)
+                        printf("~");
+                    for(int j=i;j<i+print_len;j++){
+                        printf("%c",txt[j]);
+                    }
+                    should_print_delimeter=true;
+                }
+            }
+        }
