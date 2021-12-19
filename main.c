@@ -9,7 +9,7 @@ int main(){
         char word[WORD];
 	char txt[TXT];
         scanf("%[^\n^\t^' ']s",word);
-        scanf("%[^~]s",txt);
+        scanf("%[^EOF]s",txt);
 	printf("Gematria Sequences: ");
 	gematria(word,txt);
 	printf("\nAtbash Sequences: ");
