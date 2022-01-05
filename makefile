@@ -2,8 +2,8 @@ CC= gcc
 DD= -Wall -g
 AR= ar
 
-finish: libd.a main.o
-	$(CC) $(DD) -o finish main.o libd.a
+graph: libd.a main.o
+	$(CC) $(DD) -o graph main.o libd.a
 
 libd.a: graph.o
 	$(AR) -rcs   libd.a graph.o
