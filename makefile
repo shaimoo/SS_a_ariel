@@ -14,7 +14,7 @@ main.o: main.c graph.h
 graph.o: graph.c graph.h
 	$(CC) $(DD) -c graph.c
 
-all: finish
+all: graph
 
 
 
