@@ -19,6 +19,7 @@ graph.o: graph.c graph.h
 all: finish
 
 
+
 .PHONY: clean
 
 clean:
