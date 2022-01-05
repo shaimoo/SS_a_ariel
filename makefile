@@ -2,19 +2,17 @@ CC= gcc
 DD= -Wall -g
 AR= ar
 
-
-
 finish: libd.a main.o
-        $(CC) $(DD) -o finish main.o libd.a
+	$(CC) $(DD) -o finish main.o libd.a
 
 libd.a: graph.o
-        $(AR) -rcs   libd.a graph.o
+	$(AR) -rcs   libd.a graph.o
 
 main.o: main.c graph.h
-        $(CC) $(DD) -c main.c
+	$(CC) $(DD) -c main.c
 
 graph.o: graph.c graph.h
-        $(CC) $(DD) -c graph.c
+	$(CC) $(DD) -c graph.c
 
 all: finish
 
@@ -23,4 +21,4 @@ all: finish
 .PHONY: clean
 
 clean:
-        rm -f *.o *.a graph all
+	rm -f *.o *.a finish
